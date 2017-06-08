@@ -7,6 +7,7 @@ from keras.layers import Dense
 from keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
+from keras.callbacks import CSVLogger
 
 def listSum(list):
     for i in range(len(list)):
@@ -117,6 +118,7 @@ model = Sequential() # network has a visible layer with 1 input
 model.add(LSTM(19, activation='tanh', input_shape=(1, 19), use_bias=True))
 model.add(Dense(1))
 model.compile(loss='mean_squared_error', optimizer='adam')
+csv_logger = CSVLogger('log.csv', append=True, separator=';')
 model.fit(trainX, trainY, epochs=100, batch_size=1, verbose=2)
 
 ## make predictions
